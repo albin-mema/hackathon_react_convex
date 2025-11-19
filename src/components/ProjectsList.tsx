@@ -1,55 +1,29 @@
 // src/components/ProjectsList.tsx
 import { Search, Calendar, MapPin, Users } from 'lucide-react';
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
 
 interface ProjectsListProps {
-  onViewProject: (projectId: string) => void;
+  onViewProject: (projectId: Id<'projects'>) => void;
 }
 
 export default function ProjectsList({ onViewProject }: ProjectsListProps) {
-  const projects = [
-    {
-      id: '1',
-      name: 'AI Analytics Platform',
-      code: 'TS-AI-2024',
-      description: 'Building next-gen analytics with machine learning capabilities',
-      location: 'Milan',
-      status: 'active',
-      teamCapacity: {
-        requiredSize: 8,
-        currentSize: 6,
-      },
-      deadline: '2024-12-15',
-      technologies: ['Python', 'TensorFlow', 'React', 'AWS'],
+  const data = useQuery(api.projects.list);
+  const projects = (data ?? []).map((p) => ({
+    _id: p._id as Id<'projects'>,
+    name: p.name,
+    code: p.projectCode,
+    description: p.description,
+    location: p.location,
+    status: p.status,
+    teamCapacity: {
+      requiredSize: p.teamCapacity?.requiredSize ?? p.teamSize ?? 0,
+      currentSize: p.teamCapacity?.currentSize ?? p.teamMembers?.length ?? 0,
     },
-    {
-      id: '2',
-      name: 'Cloud Migration',
-      code: 'TS-CLOUD-2024',
-      description: 'Migrating legacy systems to cloud infrastructure',
-      location: 'Tirana',
-      status: 'active',
-      teamCapacity: {
-        requiredSize: 5,
-        currentSize: 5,
-      },
-      deadline: '2024-12-01',
-      technologies: ['Azure', 'Docker', 'Kubernetes', 'Terraform'],
-    },
-    {
-      id: '3',
-      name: 'Mobile Banking App',
-      code: 'TS-MOBILE-2025',
-      description: 'Developing modern mobile banking solution with advanced security',
-      location: 'Rome',
-      status: 'planning',
-      teamCapacity: {
-        requiredSize: 10,
-        currentSize: 4,
-      },
-      deadline: '2025-08-30',
-      technologies: ['React Native', 'Swift', 'Kotlin', 'Node.js'],
-    },
-  ];
+    deadline: p.endDate ?? p.startDate,
+    technologies: p.technologies ?? [],
+  }));
 
   return (
     <div className="space-y-6">
@@ -76,7 +50,7 @@ export default function ProjectsList({ onViewProject }: ProjectsListProps) {
           
           return (
             <div 
-              key={project.id}
+              key={String(project._id)}
               className="bg-white border border-gray-200 rounded-lg p-6 hover:border-[#0066CC] transition-all duration-200"
             >
               {/* Header */}
@@ -106,7 +80,7 @@ export default function ProjectsList({ onViewProject }: ProjectsListProps) {
                 </div>
                 
                 <button 
-                  onClick={() => onViewProject(project.id)}
+                  onClick={() => onViewProject(project._id)}
                   className="px-5 py-2 bg-[#0066CC] text-white rounded-lg font-medium hover:bg-[#0052A3] transition-colors"
                 >
                   View Details

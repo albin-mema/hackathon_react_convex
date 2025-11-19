@@ -1,6 +1,7 @@
 // convex/seedData.ts
 import { mutation } from "./_generated/server";
 
+
 export const seedDatabase = mutation({
   handler: async (ctx) => {
     const now = Date.now();
@@ -25,6 +26,12 @@ export const seedDatabase = mutation({
           "giulia.bianchi@teamsystem.com",
           "luca.verdi@teamsystem.com",
         ],
+        teamCapacity: {
+          requiredSize: 12,
+          currentSize: 12,
+          missingRoles: [],
+        },
+        requiredSkills: [],
         technologies: [
           "Java",
           "Spring Boot",
@@ -81,6 +88,12 @@ export const seedDatabase = mutation({
           "alessandro.conti@teamsystem.com",
           "sara.ferrari@teamsystem.com",
         ],
+        teamCapacity: {
+          requiredSize: 15,
+          currentSize: 15,
+          missingRoles: [],
+        },
+        requiredSkills: [],
         technologies: [
           "C#",
           ".NET Core",
@@ -118,6 +131,12 @@ export const seedDatabase = mutation({
           "giuseppe.romano@teamsystem.com",
           "elena.greco@teamsystem.com",
         ],
+        teamCapacity: {
+          requiredSize: 8,
+          currentSize: 2,
+          missingRoles: [],
+        },
+        requiredSkills: [],
         technologies: [
           "Python",
           "Django",
@@ -154,6 +173,12 @@ export const seedDatabase = mutation({
           "marco.esposito@teamsystem.com",
           "chiara.lombardi@teamsystem.com",
         ],
+        teamCapacity: {
+          requiredSize: 10,
+          currentSize: 2,
+          missingRoles: [],
+        },
+        requiredSkills: [],
         technologies: [
           "Node.js",
           "MongoDB",

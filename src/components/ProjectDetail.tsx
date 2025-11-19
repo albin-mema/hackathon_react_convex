@@ -1,55 +1,24 @@
 // src/components/ProjectDetail.tsx
+import { useState } from 'react';
 import { ArrowLeft, AlertCircle, Calendar, Users, DollarSign, GitCommit, CheckSquare } from 'lucide-react';
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
 
 interface ProjectDetailProps {
-  projectId: string | null;
+  projectId: Id<'projects'> | null;
   onBack: () => void;
-  onFindMatch: (projectId: string, role: string) => void;
+  onFindMatch: (projectId: Id<'projects'>, role: string) => void;
 }
 
 export default function ProjectDetail({ projectId, onBack, onFindMatch }: ProjectDetailProps) {
-  const project = {
-    id: '1',
-    name: 'AI Analytics Platform',
-    code: 'TS-AI-2024',
-    description: 'Building ML-powered analytics dashboard with real-time insights',
-    location: 'Milan',
-    deadline: '2024-12-15',
-    budget: { spent: 127500, total: 150000 },
-    team: {
-      members: [
-        { name: 'Marco Rossi', role: 'Team Lead', avatar: 'MR' },
-        { name: 'Sofia Greco', role: 'Backend Dev', avatar: 'SG' },
-        { name: 'Elena Ferri', role: 'Data Engineer', avatar: 'EF' },
-        { name: 'Luigi Ferrari', role: 'UI/UX', avatar: 'LF' },
-        { name: 'Anna Bianchi', role: 'DevOps', avatar: 'AB' },
-        { name: 'Paolo Conti', role: 'QA', avatar: 'PC' },
-      ],
-      missing: [
-        { role: 'Frontend Developer', skills: ['React', 'TypeScript', 'Tailwind'] },
-        { role: 'Backend Developer', skills: ['Node.js', 'PostgreSQL'] },
-      ]
-    },
-    technologies: ['Python', 'TensorFlow', 'React', 'Node.js', 'PostgreSQL', 'Docker'],
-    totalCommits: 342,
-    totalJiraTickets: 48,
-    totalJiraTicketsClosed: 35,
-    recentCommits: [
-      { commitHash: 'a3f2b1c', message: 'Add ML model training pipeline', author: 'Marco Rossi', timestamp: Date.now() - 3600000 },
-      { commitHash: 'b8e4d2f', message: 'Update data preprocessing', author: 'Sofia Greco', timestamp: Date.now() - 7200000 },
-      { commitHash: 'c9f1a3e', message: 'Fix API endpoint response', author: 'Elena Ferri', timestamp: Date.now() - 14400000 },
-      { commitHash: 'd4a8b9c', message: 'Implement caching layer', author: 'Anna Bianchi', timestamp: Date.now() - 21600000 },
-      { commitHash: 'e7c2f1d', message: 'Add unit tests for API', author: 'Paolo Conti', timestamp: Date.now() - 28800000 },
-    ],
-    recentJiraTickets: [
-      { ticketId: 'TS-AI-123', title: 'Implement model evaluation metrics', status: 'In Progress', assignee: 'Marco Rossi', updatedAt: Date.now() - 3600000 },
-      { ticketId: 'TS-AI-122', title: 'Setup AWS infrastructure', status: 'Done', assignee: 'Sofia Greco', updatedAt: Date.now() - 86400000 },
-      { ticketId: 'TS-AI-121', title: 'Data pipeline optimization', status: 'In Review', assignee: 'Elena Ferri', updatedAt: Date.now() - 7200000 },
-      { ticketId: 'TS-AI-120', title: 'Design system architecture', status: 'Done', assignee: 'Luigi Ferrari', updatedAt: Date.now() - 172800000 },
-      { ticketId: 'TS-AI-119', title: 'Configure CI/CD pipeline', status: 'Done', assignee: 'Anna Bianchi', updatedAt: Date.now() - 259200000 },
-      { ticketId: 'TS-AI-118', title: 'Write integration tests', status: 'In Progress', assignee: 'Paolo Conti', updatedAt: Date.now() - 14400000 },
-    ]
-  };
+  const project = useQuery(api.projects.getById, projectId ? { id: projectId } : 'skip');
+  const employeesData = useQuery(api.employees.list);
+  const [showMatchModal, setShowMatchModal] = useState(false);
+  const [desiredRole, setDesiredRole] = useState('');
+  const [isLoadingMatch, setIsLoadingMatch] = useState(false);
+  const [showFullLoading, setShowFullLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const formatTimeAgo = (timestamp: number) => {
     const seconds = Math.floor((Date.now() - timestamp) / 1000);
@@ -74,14 +43,116 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
         </button>
         <div className="flex-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{project?.name ?? 'Project'}</h1>
             <span className="px-2.5 py-0.5 bg-gray-100 text-gray-600 rounded text-sm font-mono">
-              {project.code}
+              {project?.projectCode}
             </span>
           </div>
-          <p className="text-gray-600 mt-2">{project.description}</p>
+          <p className="text-gray-600 mt-2">{project?.description}</p>
         </div>
       </div>
+
+      {/* Match Role Modal */}
+      {showMatchModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/30" onClick={() => !isLoadingMatch && setShowMatchModal(false)} />
+          <div className="relative bg-white rounded-xl shadow-lg border border-gray-200 w-full max-w-md p-5 mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Find a Team Match</h3>
+
+            {!isLoadingMatch ? (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Role to search</label>
+                  <input
+                    type="text"
+                    value={desiredRole}
+                    onChange={(e) => setDesiredRole(e.target.value)}
+                    placeholder="e.g. Frontend Developer, React, Backend, DevOps"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC]"
+                  />
+                </div>
+
+                {(project?.teamCapacity?.missingRoles?.length ?? 0) > 0 && (
+                  <div>
+                    <div className="text-xs font-semibold text-gray-600 mb-2">Suggestions</div>
+                    <div className="flex flex-wrap gap-2">
+                      {(project?.teamCapacity?.missingRoles ?? []).slice(0,6).map((mr, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setDesiredRole(mr.role)}
+                          className="px-2.5 py-1 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded text-xs text-gray-800"
+                        >
+                          {mr.role}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex justify-end gap-2 pt-2">
+                  <button
+                    onClick={() => setShowMatchModal(false)}
+                    className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg"
+                    disabled={isLoadingMatch}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (!projectId) return;
+                      const role = desiredRole.trim() || project?.teamCapacity?.missingRoles?.[0]?.role || 'Member';
+                      // Close modal and show full page loading
+                      setShowMatchModal(false);
+                      setIsLoadingMatch(false);
+                      setProgress(0);
+                      setShowFullLoading(true);
+                      // Fake progress animation
+                      const start = Date.now();
+                      const tick = setInterval(() => {
+                        const elapsed = Date.now() - start;
+                        const pct = Math.min(95, Math.floor((elapsed / 1200) * 95));
+                        setProgress(pct);
+                      }, 100);
+                      setTimeout(() => {
+                        clearInterval(tick);
+                        setProgress(100);
+                        setShowFullLoading(false);
+                        onFindMatch(projectId, role);
+                      }, 1200);
+                    }}
+                    className="px-4 py-2 bg-[#0066CC] text-white rounded-lg text-sm font-medium hover:bg-[#0052A3] transition-colors"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="py-8 flex flex-col items-center justify-center gap-3">
+                <div className="w-8 h-8 border-2 border-[#0066CC] border-t-transparent rounded-full animate-spin" />
+                <div className="text-sm text-gray-600">Finding best matches…</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Full-page loading overlay */}
+      {showFullLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/90">
+          <div className="w-full max-w-md px-6">
+            <div className="text-center mb-4">
+              <div className="text-lg font-semibold text-gray-900">We are finding the best match…</div>
+              <div className="text-sm text-gray-600">Analyzing team needs and available candidates</div>
+            </div>
+            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className="h-2 bg-[#0066CC] transition-all"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
@@ -90,7 +161,7 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
             <Calendar className="w-4 h-4" />
             <span className="text-sm font-medium">Deadline</span>
           </div>
-          <div className="text-2xl font-bold text-gray-900">{project.deadline}</div>
+          <div className="text-2xl font-bold text-gray-900">{project?.endDate ?? project?.startDate ?? '-'}</div>
         </div>
         <div className="bg-white border border-gray-200 rounded-lg p-5">
           <div className="flex items-center gap-2 text-gray-500 mb-2">
@@ -98,7 +169,7 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
             <span className="text-sm font-medium">Budget Used</span>
           </div>
           <div className="text-2xl font-bold text-gray-900">
-            {((project.budget.spent / project.budget.total) * 100).toFixed(0)}%
+            {project?.budget ? (((project.budget.spent / project.budget.total) * 100).toFixed(0) + '%') : '-'}
           </div>
         </div>
         <div className="bg-white border border-gray-200 rounded-lg p-5">
@@ -107,58 +178,88 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
             <span className="text-sm font-medium">Team Size</span>
           </div>
           <div className="text-2xl font-bold text-gray-900">
-            {project.team.members.length}/{project.team.members.length + project.team.missing.length}
+            {(project?.teamCapacity?.currentSize ?? project?.teamMembers?.length ?? project?.teamSize ?? 0)}/
+            {(project?.teamCapacity?.requiredSize ?? project?.teamSize ?? 0)}
           </div>
         </div>
       </div>
 
       {/* Team Section */}
       <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-5">Team</h2>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-xl font-bold text-gray-900">Team</h2>
+          <button
+            onClick={() => setShowMatchModal(true)}
+            className="px-4 py-2 bg-[#0066CC] text-white rounded-lg text-sm font-medium hover:bg-[#0052A3] transition-colors disabled:opacity-50"
+          >
+            Find Team Match
+          </button>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Current Team Members */}
+          {/* Current Team Members (grouped by role) */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-700 mb-3">Current Members ({project.team.members.length})</h3>
-            <div className="space-y-2">
-              {project.team.members.map((member, idx) => (
-                <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
-                  <div className="w-10 h-10 bg-[#0066CC] rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                    {member.avatar}
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">Current Members ({project?.teamMembers?.length ?? 0})</h3>
+            <div className="space-y-4">
+              {(() => {
+                const byEmail = new Map((employeesData ?? []).map((e: any) => [e.email, e]));
+                const members = (project?.teamMembers ?? []).map((email) => {
+                  const emp = byEmail.get(email);
+                  const name = emp ? `${emp.firstName ?? ''} ${emp.lastName ?? ''}`.trim() : email;
+                  const role = emp?.role ?? 'Member';
+                  const initials = emp ? `${emp.firstName?.[0] ?? ''}${emp.lastName?.[0] ?? ''}`.toUpperCase() : email?.slice(0,2)?.toUpperCase();
+                  return { email, name, role, initials };
+                });
+                const grouped: Record<string, { email: string; name: string; role: string; initials: string }[]> = {};
+                for (const m of members) {
+                  const key = m.role || 'Member';
+                  (grouped[key] ??= []).push(m);
+                }
+                const roles = Object.keys(grouped).sort();
+                return roles.map((role) => (
+                  <div key={role} className="">
+                    <div className="text-xs font-semibold text-gray-600 mb-2">{role} ({grouped[role].length})</div>
+                    <div className="space-y-2">
+                      {grouped[role].map((m) => (
+                        <div key={m.email} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                          <div className="w-10 h-10 bg-[#0066CC] rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                            {m.initials}
+                          </div>
+                          <div>
+                            <div className="font-medium text-gray-900 text-sm">{m.name}</div>
+                            <div className="text-xs text-gray-600">{m.email}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-medium text-gray-900 text-sm">{member.name}</div>
-                    <div className="text-xs text-gray-600">{member.role}</div>
-                  </div>
-                </div>
-              ))}
+                ));
+              })()}
             </div>
           </div>
 
           {/* Open Positions */}
-          {project.team.missing.length > 0 && (
+          {(project?.teamCapacity?.missingRoles?.length ?? 0) > 0 && (
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <h3 className="text-sm font-semibold text-gray-700">Open Positions ({project.team.missing.length})</h3>
+                <h3 className="text-sm font-semibold text-gray-700">Open Positions ({project?.teamCapacity?.missingRoles?.length})</h3>
                 <AlertCircle className="w-4 h-4 text-gray-400" />
               </div>
               <div className="space-y-3">
-                {project.team.missing.map((missing, idx) => (
+                {(project?.teamCapacity?.missingRoles ?? []).map((missing, idx) => (
                   <div key={idx} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <h4 className="font-semibold text-gray-900">{missing.role}</h4>
                       <button 
-                        onClick={() => onFindMatch(project.id, missing.role)}
+                        onClick={() => projectId && onFindMatch(projectId, missing.role)}
                         className="px-4 py-1.5 bg-[#0066CC] text-white rounded-lg text-xs font-medium hover:bg-[#0052A3] transition-colors whitespace-nowrap"
                       >
                         Find Match
                       </button>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
-                      {missing.skills.map((skill, sidx) => (
-                        <span key={sidx} className="px-2 py-0.5 bg-white text-gray-700 rounded text-xs border border-gray-200">
-                          {skill}
-                        </span>
+                      {(missing.skills ?? []).map((skill, sidx) => (
+                        <span key={sidx} className="px-2 py-0.5 bg-white text-gray-700 rounded text-xs border border-gray-200">{skill}</span>
                       ))}
                     </div>
                   </div>
@@ -173,7 +274,7 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
       <div className="bg-white border border-gray-200 rounded-lg p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Technologies</h2>
         <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech, idx) => (
+          {(project?.technologies ?? []).map((tech, idx) => (
             <span key={idx} className="px-3 py-1.5 bg-gray-50 text-gray-700 rounded-lg text-sm border border-gray-200">
               {tech}
             </span>
@@ -191,7 +292,7 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
               <GitCommit className="w-6 h-6 text-[#0066CC]" />
             </div>
             <div>
-              <div className="text-2xl font-bold text-gray-900">{project.totalCommits}</div>
+              <div className="text-2xl font-bold text-gray-900">{project?.totalCommits ?? 0}</div>
               <p className="text-sm text-gray-600">Total commits</p>
             </div>
           </div>
@@ -201,7 +302,7 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
             </div>
             <div>
               <div className="text-2xl font-bold text-gray-900">
-                {project.totalJiraTicketsClosed}/{project.totalJiraTickets}
+                {project?.totalJiraTicketsClosed ?? 0}/{project?.totalJiraTickets ?? 0}
               </div>
               <p className="text-sm text-gray-600">Tasks completed</p>
             </div>
@@ -217,7 +318,7 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
               Recent Commits
             </h3>
             <div className="space-y-2">
-              {project.recentCommits.map((commit, idx) => (
+              {(project?.recentCommits ?? []).map((commit, idx) => (
                 <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
                   <div className="flex items-start justify-between gap-2 mb-1.5">
                     <span className="font-mono text-xs text-[#0066CC]">{commit.commitHash}</span>
@@ -237,7 +338,7 @@ export default function ProjectDetail({ projectId, onBack, onFindMatch }: Projec
               Recent Tasks
             </h3>
             <div className="space-y-2">
-              {project.recentJiraTickets.map((ticket, idx) => (
+              {(project?.recentJiraTickets ?? []).map((ticket, idx) => (
                 <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
                   <div className="flex items-start justify-between gap-2 mb-1.5">
                     <span className="font-mono text-xs text-[#0066CC]">{ticket.ticketId}</span>

@@ -1,57 +1,45 @@
 // src/components/MatchingResults.tsx
 import { ArrowLeft, MapPin, CheckCircle } from 'lucide-react';
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
 
 interface MatchingResultsProps {
-  projectId: string | null;
+  projectId: Id<'projects'> | null;
   missingRole: string | null;
   onBack: () => void;
 }
 
-export default function MatchingResults({ projectId, missingRole, onBack }: MatchingResultsProps) {
-  const matches = [
-    {
-      id: '1',
-      name: 'Marco Rossi',
-      avatar: 'MR',
-      role: 'Senior Full-Stack Developer',
-      location: 'Tirana',
-      experience: '8 years',
-      matchScore: 95,
-      skills: [
-        { name: 'React', match: true },
-        { name: 'TypeScript', match: true },
-        { name: 'Tailwind CSS', match: true },
-      ]
-    },
-    {
-      id: '2',
-      name: 'Luigi Ferrari',
-      avatar: 'LF',
-      role: 'Frontend Developer',
-      location: 'Rome',
-      experience: '7 years',
-      matchScore: 92,
-      skills: [
-        { name: 'React', match: true },
-        { name: 'TypeScript', match: true },
-        { name: 'Tailwind CSS', match: true },
-      ]
-    },
-    {
-      id: '3',
-      name: 'Giulia Mancini',
-      avatar: 'GM',
-      role: 'Frontend Developer',
-      location: 'Milan',
-      experience: '4 years',
-      matchScore: 85,
-      skills: [
-        { name: 'React', match: true },
-        { name: 'TypeScript', match: true },
-        { name: 'CSS', match: false },
-      ]
-    },
-  ];
+export default function MatchingResults({ projectId: _projectId, missingRole, onBack }: MatchingResultsProps) {
+  const employeesData = useQuery(api.employees.list);
+  const employees = (employeesData ?? []).map((e) => ({
+    id: String(e._id),
+    name: `${e.firstName} ${e.lastName}`,
+    avatar: `${e.firstName?.[0] ?? ''}${e.lastName?.[0] ?? ''}`.toUpperCase(),
+    role: e.role,
+    location: e.location,
+    experience: `${e.yearsOfExperience ?? 0} years`,
+    skillsList: (e.skills ?? []).map((s: any) => s.name?.toLowerCase?.()),
+  }));
+
+  const target = (missingRole ?? '').toLowerCase();
+  const matches = employees
+    .map((e) => {
+      const roleMatch = target ? e.role?.toLowerCase?.().includes(target) : true;
+      const skills = (e.skillsList ?? []).slice(0, 3);
+      const matchScore = Math.min(100, (roleMatch ? 80 : 50) + (skills.length * 5));
+      return {
+        id: e.id,
+        name: e.name,
+        avatar: e.avatar,
+        role: e.role,
+        location: e.location,
+        experience: e.experience,
+        matchScore,
+        skills: skills.map((name) => ({ name, match: true })),
+      };
+    })
+    .sort((a, b) => b.matchScore - a.matchScore);
 
   return (
     <div className="space-y-6">

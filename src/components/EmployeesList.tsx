@@ -1,45 +1,25 @@
 // src/components/EmployeesList.tsx
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 import { Search, MapPin } from 'lucide-react';
+import type { Id } from '../../convex/_generated/dataModel';
 
-export default function EmployeesList() {
-  const employees = [
-    {
-      id: '1',
-      name: 'Marco Rossi',
-      avatar: 'MR',
-      role: 'Senior Full-Stack Developer',
-      location: 'Tirana',
-      skills: ['React', 'Node.js', 'TypeScript', 'Azure'],
-      experience: '8 years'
-    },
-    {
-      id: '2',
-      name: 'Sofia Greco',
-      avatar: 'SG',
-      role: 'Senior Backend Engineer',
-      location: 'Milan',
-      skills: ['Python', 'Django', 'Azure', 'Kubernetes'],
-      experience: '10 years'
-    },
-    {
-      id: '3',
-      name: 'Elena Ferri',
-      avatar: 'EF',
-      role: 'Data Engineer',
-      location: 'Tirana',
-      skills: ['Python', 'Spark', 'SQL', 'Airflow'],
-      experience: '6 years'
-    },
-    {
-      id: '4',
-      name: 'Luigi Ferrari',
-      avatar: 'LF',
-      role: 'Frontend Developer',
-      location: 'Rome',
-      skills: ['React', 'Figma', 'TypeScript', 'CSS'],
-      experience: '7 years'
-    },
-  ];
+interface EmployeesListProps {
+  onViewEmployee: (employeeId: Id<'employees'>) => void;
+}
+
+export default function EmployeesList({ onViewEmployee }: EmployeesListProps) {
+  const data = useQuery(api.employees.list);
+  const employees = (data ?? []).map((e) => ({
+    id: String(e._id),
+    srcId: e._id as Id<'employees'>,
+    name: `${e.firstName} ${e.lastName}`,
+    avatar: `${e.firstName?.[0] ?? ''}${e.lastName?.[0] ?? ''}`.toUpperCase(),
+    role: e.role,
+    location: e.location,
+    skills: (e.skills ?? []).map((s: any) => s.name),
+    experience: `${e.yearsOfExperience ?? 0} years`,
+  }));
 
   return (
     <div className="space-y-6">
@@ -88,6 +68,15 @@ export default function EmployeesList() {
                     {skill}
                   </span>
                 ))}
+              </div>
+
+              <div className="mt-5 pt-4 border-t border-gray-100 w-full flex justify-end">
+                <button
+                  onClick={() => onViewEmployee(employee.srcId)}
+                  className="px-4 py-2 text-[#0066CC] text-sm font-medium hover:bg-blue-50 rounded-lg transition-colors"
+                >
+                  View Profile →
+                </button>
               </div>
             </div>
           </div>

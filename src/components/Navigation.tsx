@@ -1,19 +1,29 @@
 // src/components/Navigation.tsx
 import { LayoutDashboard, Briefcase, Users, GitBranch } from 'lucide-react';
 
-type ViewType = 'dashboard' | 'projects' | 'employees' | 'matching';
+import { useAuthContext } from "../context/AuthContext";
+
+
+type View = 'projects' | 'employees' | 'project-detail' | 'matching' |'login';
 
 interface NavigationProps {
-  currentView: ViewType;
-  onNavigate: (view: ViewType) => void;
+  currentView: View;
+  onNavigate: (view: View) => void;
 }
 
 export default function Navigation({ currentView, onNavigate }: NavigationProps) {
+   const {  logout } = useAuthContext();
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'projects', label: 'Projects', icon: Briefcase },
     { id: 'employees', label: 'Team', icon: Users },
   ];
+
+    const handleLogout = () => {
+    logout();
+    onNavigate("login"); // redirect to login view
+  };
+
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
@@ -39,7 +49,7 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
               return (
                 <button
                   key={item.id}
-                  onClick={() => onNavigate(item.id as ViewType)}
+                  onClick={() => onNavigate(item.id as View)}
                   className={`
                     flex items-center space-x-2 px-4 py-2 rounded-lg transition-all font-medium
                     ${isActive 
@@ -64,6 +74,12 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
               <span className="text-white text-sm font-bold">MN</span>
             </div>
+             <button
+              onClick={handleLogout}
+              className="px-3 py-1 text-sm text-gray-600 hover:text-white hover:bg-red-500 rounded"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>

@@ -201,4 +201,9 @@ export default defineSchema({
     .index("by_project", ["projectId"])
     .index("by_employee", ["employeeId"])
     .index("by_status", ["status"]),
+  managers: defineTable({
+      email: v.string(),
+      passwordHash: v.string()
+     })
+     .index("by_email", ["email"])
 });

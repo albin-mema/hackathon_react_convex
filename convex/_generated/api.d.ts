@@ -8,7 +8,7 @@
  * @module
  */
 
-import type * as counter from "../counter.js";
+import type * as functions_login from "../functions/login.js";
 import type * as schema_employer from "../schema/employer.js";
 import type * as schema_projects from "../schema/projects.js";
 
@@ -19,7 +19,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  counter: typeof counter;
+  "functions/login": typeof functions_login;
   "schema/employer": typeof schema_employer;
   "schema/projects": typeof schema_projects;
 }>;

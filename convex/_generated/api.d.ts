@@ -9,6 +9,8 @@
  */
 
 import type * as counter from "../counter.js";
+import type * as schema_employer from "../schema/employer.js";
+import type * as schema_projects from "../schema/projects.js";
 
 import type {
   ApiFromModules,
@@ -18,6 +20,8 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   counter: typeof counter;
+  "schema/employer": typeof schema_employer;
+  "schema/projects": typeof schema_projects;
 }>;
 
 /**

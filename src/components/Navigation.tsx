@@ -1,7 +1,7 @@
-// src/components/Navigation.tsx
-import { Compass, Users, Briefcase, Package } from 'lucide-react';
+import { Compass, Users, Briefcase, Package } from "lucide-react";
+import { useAuthContext } from "../context/AuthContext";
 
-type ViewType = 'dashboard' | 'project-matching' | 'employee-matching' | 'features-repo';
+type ViewType = "dashboard" | "project-matching" | "employee-matching" | "features-repo";
 
 interface NavigationProps {
   currentView: ViewType;
@@ -9,11 +9,18 @@ interface NavigationProps {
 }
 
 export default function Navigation({ currentView, onNavigate }: NavigationProps) {
+  const { user, logout } = useAuthContext();
+
   const navItems = [
-    { id: 'project-matching', label: 'Project Matching', icon: Briefcase },
-    { id: 'employee-matching', label: 'Connect People', icon: Users },
-    { id: 'features-repo', label: 'Features Library', icon: Package },
+    { id: "project-matching", label: "Project Matching", icon: Briefcase },
+    { id: "employee-matching", label: "Connect People", icon: Users },
+    { id: "features-repo", label: "Features Library", icon: Package },
   ];
+
+  const handleLogout = () => {
+    logout();
+    onNavigate("login"); // redirect to login view
+  };
 
   return (
     <nav className="bg-white shadow-md border-b border-gray-200">
@@ -35,16 +42,16 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentView === item.id;
-              
+
               return (
                 <button
                   key={item.id}
                   onClick={() => onNavigate(item.id as string)}
                   className={`
                     flex items-center space-x-2 px-4 py-2 rounded-lg transition-all
-                    ${isActive 
-                      ? 'bg-gradient-to-r from-blue-600 to-pink-600 text-white shadow-lg' 
-                      : 'text-gray-600 hover:bg-gray-100'
+                    ${isActive
+                      ? "bg-gradient-to-r from-blue-600 to-pink-600 text-white shadow-lg"
+                      : "text-gray-600 hover:bg-gray-100"
                     }
                   `}
                 >
@@ -55,11 +62,17 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
             })}
           </div>
 
-          {/* User Profile */}
+          {/* User Profile & Logout */}
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-bold">MR</span>
+              <span className="text-white text-sm font-bold">{user?.firstName?.[0]}{user?.lastName?.[0]}</span>
             </div>
+            <button
+              onClick={handleLogout}
+              className="px-3 py-1 text-sm text-gray-600 hover:text-white hover:bg-red-500 rounded"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>

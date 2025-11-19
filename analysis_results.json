@@ -1,0 +1,405 @@
+[
+  {
+    "name": "Mario Margjini",
+    "technologies": [
+      {
+        "name": "React",
+        "category": "Frontend Framework"
+      },
+      {
+        "name": "Git",
+        "category": "Version Control"
+      },
+      {
+        "name": "JavaScript/TypeScript",
+        "category": "Programming Language"
+      },
+      {
+        "name": "CI/CD Pipeline",
+        "category": "DevOps Tool"
+      }
+    ],
+    "business_features": [
+      {
+        "name": "Netlex Cloud Distribution Access Control",
+        "description": "Implemented conditional access logic to restrict Agenda>Udienza and Impegni workflows to only users with Netlex-in-the-cloud distribution, enhancing licensing compliance and feature gating in a legal practice management system."
+      },
+      {
+        "name": "Legal Subscription Type Management",
+        "description": "Created NetlexSubscriptionType enum and integrated it into Udienza (Hearing) and Impegno (Commitment/Task) modules, enabling differentiated functionality based on subscription tiers in the legal software platform."
+      },
+      {
+        "name": "Court Date Reminder System",
+        "description": "Developed Agenda Reminder functionality for legal commitments (Impegno), including user editing state management and dynamic days-before calculation logic to support deadline tracking in legal workflows."
+      },
+      {
+        "name": "Legal Service Pricing (Listino) Integration",
+        "description": "Extended the Listino (price list/rate card) feature from Prestazioni (Services) to Impegno module, enabling accurate billing and time tracking for legal activities based on service catalogs."
+      },
+      {
+        "name": "Version Control for Legal Case Data",
+        "description": "Implemented version checks on input fields in scheda impegno (case/task form) to prevent data conflicts and ensure auditability in legal case management workflows."
+      },
+      {
+        "name": "User Distribution and Access Rights",
+        "description": "Added 'Aggiungi' button functionality in Udienza module and implemented NETLEX_PDL checks to control user permissions and feature access based on distribution rights."
+      }
+    ],
+    "summary": "Frontend developer specializing in legal practice management software, focusing on access control, subscription-based feature gating, and workflow automation for court dates, legal commitments, and billing systems.",
+    "email": "m.margjini@teamsystem.com"
+  },
+  {
+    "name": "Damian Krzysztyniak",
+    "technologies": [
+      {
+        "name": "React",
+        "category": "Frontend Framework"
+      },
+      {
+        "name": "TypeScript",
+        "category": "Programming Language"
+      },
+      {
+        "name": "Zustand",
+        "category": "State Management"
+      },
+      {
+        "name": "Genact API",
+        "category": "External API"
+      },
+      {
+        "name": "Tailwind CSS",
+        "category": "Styling Framework"
+      },
+      {
+        "name": ".npmrc",
+        "category": "Build Tool Configuration"
+      },
+      {
+        "name": "Hidden Iframe",
+        "category": "Authentication Mechanism"
+      },
+      {
+        "name": "Zend Authentication",
+        "category": "Authentication System"
+      },
+      {
+        "name": "TeamSystem ID",
+        "category": "Identity Provider"
+      },
+      {
+        "name": "Vapor Components",
+        "category": "UI Component Library"
+      }
+    ],
+    "business_features": [
+      {
+        "name": "Pignoramento Presso Terzi Workflow",
+        "description": "Implemented a multi-step legal workflow for Third-Party Attachment acts, including tabs for managing procuras/parties, documents, enforcement titles, and summary review. Integrated file upload, manual data entry, and Zustand-based state persistence across steps."
+      },
+      {
+        "name": "Ricorso Decreto Ingiuntivo Wizard",
+        "description": "Developed a multi-step wizard for Appeal against Injunction Decree, including form navigation, file upload, and integration with Genact API for AI-driven document analysis and generation."
+      },
+      {
+        "name": "Atto Precetto Legal Form",
+        "description": "Built a multi-step form for creating Atto Precetto legal documents with validation, optional file uploads for PEC notification and executory documents, and dynamic filtering of procure options based on selected tipologia."
+      },
+      {
+        "name": "AI-Powered Document Authentication",
+        "description": "Enhanced file upload security by implementing AI token authentication, replacing default JWT tokens with AI-specific tokens from localStorage for backend API calls, enabling AI-driven document analysis."
+      },
+      {
+        "name": "Legal Document Manual Input Feature",
+        "description": "Added functionality for users to manually input additional information via toggleable text areas in Esecutorieta and PEC Notifica tabs, with persistent state management."
+      },
+      {
+        "name": "Zend-Based Customer Authentication",
+        "description": "Implemented authentication flow using TeamSystem ID with customer distribution selection, including dynamic subdomain configuration based on selected distribution for multi-tenant legal platform access."
+      },
+      {
+        "name": "AI Chat Interface for Legal Assistance",
+        "description": "Created an animated AI chat interface with welcome screen, message transitions, user/AI message components, and action buttons to support legal document workflows and user guidance."
+      },
+      {
+        "name": "Court Document Indexing and Generation",
+        "description": "Implemented backend integration for document generation, indexing, and payload adjustment to support legal workflows including pignoramento and ricorso processes."
+      },
+      {
+        "name": "Conditional Legal File Upload Logic",
+        "description": "Removed mandatory file upload requirements in Atto Precetto process and implemented conditional rendering based on user input, improving flexibility in legal document submission workflows."
+      },
+      {
+        "name": "AI Token Management System",
+        "description": "Centralized AI token retrieval with dedicated hooks and utilities to prevent race conditions, ensuring single token requests during concurrent operations for legal document processing."
+      }
+    ],
+    "summary": "Full-stack developer specializing in legal technology with expertise in building complex legal workflow systems including Pignoramento, Ricorso, and Atto Precetto processes. Strong focus on AI-integrated document processing, multi-step legal forms, and secure authentication for legal platforms.",
+    "email": "d.krzysztyniak@teamsystem.com"
+  },
+  {
+    "name": "Emine Isufi",
+    "technologies": [
+      {
+        "name": "React",
+        "category": "Frontend Framework"
+      },
+      {
+        "name": "JavaScript/TypeScript",
+        "category": "Programming Language"
+      },
+      {
+        "name": "Git",
+        "category": "Version Control"
+      },
+      {
+        "name": "MR (Merge Request) Workflow",
+        "category": "Development Process"
+      }
+    ],
+    "business_features": [
+      {
+        "name": "Agenda-Macro Implementation",
+        "description": "Implemented a macro-level agenda system to manage court dates and legal proceedings, enabling high-level scheduling and coordination across legal cases."
+      },
+      {
+        "name": "Udienza-Macro Implementation",
+        "description": "Developed functionality for managing court hearings (udienza) at a macro level, supporting legal workflow coordination and case timeline management."
+      },
+      {
+        "name": "Agenda Udienza Reminder System",
+        "description": "Built a reminder system for court hearings and agenda events to ensure timely legal actions and improve case management efficiency."
+      },
+      {
+        "name": "Agenda Edit Udienza Functionality",
+        "description": "Implemented editing capabilities for court hearing entries, allowing legal professionals to update hearing details, notes, and procedural information."
+      },
+      {
+        "name": "Agenda Preview with Redirection Logic",
+        "description": "Created a preview system for agenda items with conditional redirection to legacy systems when viewing Udienza (hearing) details, ensuring compatibility and smooth user experience."
+      },
+      {
+        "name": "Agenda Conflict Detection (Conflitti Evento)",
+        "description": "Refactored and implemented logic to detect scheduling conflicts in the legal agenda system, preventing overlapping court dates and hearings."
+      },
+      {
+        "name": "Impegno Preview with Additional Information",
+        "description": "Enhanced the commitment (impegno) preview feature by adding detailed legal context and information, improving case preparation and task clarity."
+      },
+      {
+        "name": "Legal Note and Sigla Management",
+        "description": "Implemented functionality to manage legal notes and sigla (abbreviations/identifiers) within the agenda system, supporting standardized legal documentation."
+      },
+      {
+        "name": "Calendar Printing for Legal Proceedings",
+        "description": "Fixed and enhanced calendar printing features to generate printable schedules of court dates and legal events for offline use and legal record-keeping."
+      },
+      {
+        "name": "Agenda Annotations and Practice Linking",
+        "description": "Implemented annotation support and linking between agenda items and legal practice records, enabling integrated case file access and contextual notes."
+      }
+    ],
+    "summary": "Frontend developer specializing in legal case management systems, with a focus on court agenda scheduling, hearing coordination, and legal workflow automation. Demonstrates deep engagement with Italian legal terminology and processes, particularly around udienza (hearings), impegno (commitments), and agenda conflict resolution.",
+    "email": "e.isufi@teamsystem.com"
+  },
+  {
+    "name": "Nikita Vagadiya",
+    "technologies": [
+      {
+        "name": "React",
+        "category": "Frontend Framework"
+      },
+      {
+        "name": "TypeScript",
+        "category": "Programming Language"
+      },
+      {
+        "name": "Git",
+        "category": "Version Control"
+      },
+      {
+        "name": "Merge Requests",
+        "category": "Collaboration Tool"
+      }
+    ],
+    "business_features": [
+      {
+        "name": "Anagrafica Type Management",
+        "description": "Implemented anagrafica type handling in edit forms, including type assignment and sub-type reversion logic for legal entity classification."
+      },
+      {
+        "name": "Legal Agenda Permissions System",
+        "description": "Developed role-based permissions for agenda access and actions, including conditional UI controls and restricted functionality based on user roles."
+      },
+      {
+        "name": "Udienza Export Functionality",
+        "description": "Built export functionality for udienza (court hearing) data with multi-select conditions and user selection-based filtering."
+      },
+      {
+        "name": "Agenda Scheduling System",
+        "description": "Implemented agenda scheduling features including time slot management, conflict detection, and scheduling workflow for legal appointments."
+      },
+      {
+        "name": "Anagrafica Permissions Framework",
+        "description": "Created permission system for anagrafica (client/person) records, controlling access and operations on sensitive legal entity data."
+      },
+      {
+        "name": "Court Date Notification Controls",
+        "description": "Implemented logic to hide bell icon notifications for impegno (commitment/obligation) items, managing legal deadline alerts."
+      }
+    ],
+    "summary": "Frontend developer specializing in legal domain applications, focused on building role-based access systems, legal entity management, and court scheduling workflows with React and TypeScript.",
+    "email": "n.vagadiya.ext@teamsystem.com"
+  },
+  {
+    "name": "Albin Mema",
+    "technologies": [
+      {
+        "name": "React",
+        "category": "Frontend Framework"
+      },
+      {
+        "name": "Git",
+        "category": "Version Control"
+      },
+      {
+        "name": "Merge Requests",
+        "category": "Collaboration Tool"
+      }
+    ],
+    "business_features": [
+      {
+        "name": "Calendar Performance Optimization",
+        "description": "Implemented loading improvements for the calendar page including adding a spinner to enhance user experience during data loading, directly improving perceived performance in the agenda module."
+      },
+      {
+        "name": "Agenda Permissions Enforcement",
+        "description": "Implemented role-based access control for calendar and 'lista impegni' (engagement list) views, ensuring users only access legally relevant agenda items based on their permissions within the legal workflow system."
+      },
+      {
+        "name": "Udienza Deletion Functionality",
+        "description": "Added delete capability for 'udienza' (court hearing) entries in the agenda, supporting legal case management workflows where hearing entries may need to be removed or corrected."
+      },
+      {
+        "name": "Performance Preview Tab",
+        "description": "Implemented a new tab in the agenda preview for 'prestazioni' (performances/services), enabling legal professionals to review and edit engagement details within the context of case timelines and service delivery tracking."
+      }
+    ],
+    "summary": "Frontend developer specializing in legal case management systems, with focus on calendar/agenda functionality for court dates, hearing management, and legal engagement workflows. Experienced in implementing role-based permissions and performance optimizations in React-based legal software.",
+    "email": "a.mema@teamsystem.com"
+  },
+  {
+    "name": "Albin Mema",
+    "technologies": [
+      {
+        "name": "React",
+        "category": "Frontend Framework"
+      },
+      {
+        "name": "TypeScript",
+        "category": "Programming Language"
+      },
+      {
+        "name": "Biome",
+        "category": "Code Formatting Tool"
+      },
+      {
+        "name": "CustomDataGrid",
+        "category": "UI Component Library"
+      },
+      {
+        "name": "VaporPage",
+        "category": "Design System / UI Framework"
+      },
+      {
+        "name": "Calendar",
+        "category": "UI Component"
+      }
+    ],
+    "business_features": [
+      {
+        "name": "Legal Calendar Management",
+        "description": "Implemented calendar functionality for managing legal appointments (udienze) with permissions enforcement, private event support, and delete functionality for court hearings. Includes spinner for UX feedback during loading states."
+      },
+      {
+        "name": "Legal Engagement Tracking (Lista Impegni)",
+        "description": "Built access-controlled lista impegni (engagement list) with role-based permissions, enabling legal teams to track ongoing cases and responsibilities securely."
+      },
+      {
+        "name": "Court Hearing (Udienza) Management",
+        "description": "Added delete functionality for udienza (court hearing) entries, supporting case lifecycle management in legal workflows."
+      },
+      {
+        "name": "Performance Monitoring Dashboard (Prestazioni Tab)",
+        "description": "Developed prestazioni (performance) tab to preview and edit legal engagement details, including deadline checkbox functionality and badge alignment for status tracking."
+      },
+      {
+        "name": "Data Grid for Legal Records",
+        "description": "Enhanced CustomDataGrid with column pinning to keep action buttons and selection checkboxes visible, enabling efficient handling of large legal datasets. Implemented fixed-width sizing to align with VaporPage.Section layout for consistent UI experience."
+      },
+      {
+        "name": "Privacy and Data Protection Controls",
+        "description": "Implemented privacy functionality for calendar events, including private event handling and anonymization logic, supporting GDPR compliance in legal data management."
+      }
+    ],
+    "summary": "Full-stack developer specializing in legal workflow applications, with focus on court calendar management, legal engagement tracking, and data privacy compliance. Experienced in building structured UI components for complex legal data handling and performance monitoring.",
+    "email": "albinmema25@gmail.com"
+  },
+  {
+    "name": "Klajdi Tolis",
+    "technologies": [
+      {
+        "name": "React",
+        "category": "Frontend Framework"
+      },
+      {
+        "name": "TypeScript",
+        "category": "Programming Language"
+      },
+      {
+        "name": "moment.js",
+        "category": "Date Library"
+      },
+      {
+        "name": "Git",
+        "category": "Version Control"
+      },
+      {
+        "name": "Netlex",
+        "category": "Legal Tech Platform"
+      }
+    ],
+    "business_features": [
+      {
+        "name": "Atto di Precetto Creation Flow",
+        "description": "Implemented a legal workflow for generating 'Atto di Precetto' documents, which are formal Italian legal notices used to demand payment or performance before initiating enforcement proceedings. This involves domain-specific logic for legal document generation within the agenda system."
+      },
+      {
+        "name": "Agenda Spesa from Impegno Integration",
+        "description": "Developed functionality to create expense agendas ('Agenda Spesa') directly from commitments ('Impegno'), enabling seamless transition between legal commitment records and associated financial tracking within the legal case management system."
+      },
+      {
+        "name": "Performance Data Handling for Legal Commitments",
+        "description": "Enhanced the management of performance data linked to legal commitments, including proper user ID association and data synchronization across components. This supports tracking of legal actions and responsible parties in case workflows."
+      },
+      {
+        "name": "Quick Commitment Modal with Notification System",
+        "description": "Implemented a streamlined interface for creating legal commitments ('Impegno') with real-time notification logic to prevent data loss. Includes state management for unsaved changes and modal lifecycle control for legal workflow efficiency."
+      },
+      {
+        "name": "Deadlines List with Legal Date Management",
+        "description": "Enhanced the deadlines tracking system for legal proceedings, integrating date formatting via moment.js and improving handling of court dates, submission deadlines, and other time-sensitive legal events."
+      },
+      {
+        "name": "Custom Event UI for Legal Proceedings",
+        "description": "Refined navigation and conditional rendering logic for legal event management, ensuring proper display of event details based on location (eventLocation) or authority (autorita), which are critical attributes in Italian legal procedure tracking."
+      },
+      {
+        "name": "ImpegnoPreview Component Optimization",
+        "description": "Cleaned up and optimized the preview component for legal commitments, removing unused functionality while maintaining core legal document visualization capabilities."
+      }
+    ],
+    "summary": "Frontend developer specializing in legal tech applications, with focus on Italian legal workflows including enforcement notices (Atto di Precetto), commitment tracking (Impegno), and deadline management. Experienced in building React-based interfaces for case management systems with attention to legal domain logic and data integrity.",
+    "email": "k.tolis@teamsystem.com"
+  }
+]

@@ -1,0 +1,7 @@
+pydriller
+convex
+python-dotenv
+langchain
+langchain-openai
+pydantic
+tiktoken

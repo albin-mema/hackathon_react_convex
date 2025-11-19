@@ -8,7 +8,10 @@
  * @module
  */
 
+import type * as analysis from "../analysis.js";
 import type * as counter from "../counter.js";
+import type * as ingest from "../ingest.js";
+import type * as test_cal_query from "../test_cal_query.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +20,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  analysis: typeof analysis;
   counter: typeof counter;
+  ingest: typeof ingest;
+  test_cal_query: typeof test_cal_query;
 }>;
 
 /**

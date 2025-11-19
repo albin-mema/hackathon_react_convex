@@ -1,0 +1,542 @@
+[
+  {
+    "name": "Albin Mema",
+    "email": "a.mema@teamsystem.com",
+    "summary": "Frontend developer specializing in calendar and agenda functionality with expertise in React-based UI components and business logic implementation.",
+    "skills": {
+      "specific_integrations": [],
+      "domain_concepts": [
+        "Calendar Event Management",
+        "Agenda Permissions Logic",
+        "Private Engagement Filtering",
+        "Court Date Scheduling",
+        "Deadline Management System",
+        "Event Status Tracking",
+        "Full-day Engagement Display",
+        "Workflow Editor Logic",
+        "Delegation Management",
+        "Dynamic Form Fields",
+        "User Access Control",
+        "Contact Linking System"
+      ],
+      "technical_stack": [
+        "React Query",
+        "Custom Select Components",
+        "Autocomplete Wrapper",
+        "Calendar UI Components",
+        "Spinner Loading States",
+        "UI State Management",
+        "Component Refactoring",
+        "Merge Request Workflow"
+      ]
+    }
+  },
+  {
+    "name": "Albin Mema",
+    "email": "albinmema25@gmail.com",
+    "summary": "Frontend developer specializing in React-based calendar and data grid systems with focus on UI consistency and permission logic.",
+    "skills": {
+      "specific_integrations": [
+        "LocalStorage API",
+        "dayjs date library",
+        "Vapor UI components",
+        "MUI Tooltip system"
+      ],
+      "domain_concepts": [
+        "Calendar Event Management",
+        "Permission-based Access Control",
+        "Deadline Tracking Logic",
+        "Private Event Handling",
+        "Full-day Event Logic",
+        "Court Date Workflow",
+        "Engagement Scheduling",
+        "Optimistic UI Updates",
+        "Event Color Coding System",
+        "Column Pinning Logic"
+      ],
+      "technical_stack": [
+        "React DataGrid",
+        "CustomDataGrid component",
+        "Biome code formatter",
+        "React Query",
+        "TypeScript",
+        "SCSS styling",
+        "Month/Week/Day calendar views",
+        "MoreEventsModal component",
+        "QuickImpegnoModal",
+        "UIShell navigation"
+      ]
+    }
+  },
+  {
+    "name": "alexfriendz",
+    "email": "alessandroserafini19@gmail.com",
+    "summary": "Developer working on backend logic and build configuration with focus on row function management and conflict resolution.",
+    "skills": {
+      "specific_integrations": [],
+      "domain_concepts": [
+        "Row Function Management",
+        "Conflict Resolution",
+        "Impegni Scheduling",
+        "Court Date Logic"
+      ],
+      "technical_stack": [
+        "Makefile Configuration",
+        "Git Version Control",
+        "Build System Management"
+      ]
+    }
+  },
+  {
+    "name": "Claudio Caporro",
+    "email": "claudio@caporro.it",
+    "summary": "Full-stack developer specializing in React applications with modern deployment practices and design system integration.",
+    "skills": {
+      "specific_integrations": [
+        "Backend API integration",
+        "Environment variable configuration",
+        "GitLab CI/CD pipeline"
+      ],
+      "domain_concepts": [
+        "Application routing logic",
+        "Layout system architecture",
+        "Deployment workflow optimization"
+      ],
+      "technical_stack": [
+        "React SDK 3.0.1",
+        "@vapor/v3-components",
+        "Vapor V3 design system",
+        "PageTitle component",
+        "Application layout component",
+        "Git version control"
+      ]
+    }
+  },
+  {
+    "name": "Damian Krzysztyniak",
+    "email": "d.krzysztyniak@teamsystem.com",
+    "summary": "Frontend developer specializing in React-based legal document workflows with AI integration and state management.",
+    "skills": {
+      "specific_integrations": [
+        "Genact API",
+        "Zend authentication",
+        "TeamSystem ID",
+        "localStorage AI token",
+        "Amazon production endpoint",
+        "Stripe API"
+      ],
+      "domain_concepts": [
+        "Pignoramento Presso Terzi workflow",
+        "Ricorso Decreto Ingiuntivo wizard",
+        "Atto Precetto form logic",
+        "Court date logic",
+        "Legal document generation",
+        "File upload validation",
+        "Multi-step form state"
+      ],
+      "technical_stack": [
+        "React Query",
+        "Zustand stores",
+        "React hooks",
+        "Vapor components",
+        "Express.js",
+        "npm registry auth"
+      ]
+    }
+  },
+  {
+    "name": "Emine Isufi",
+    "email": "e.isufi.ext@teamsystem.com",
+    "summary": "Frontend developer focusing on Anagrafiche module enhancements and PCT integration.",
+    "skills": {
+      "specific_integrations": [],
+      "domain_concepts": [
+        "Anagrafiche filters",
+        "Anagrafiche Index",
+        "PCT-embedded section"
+      ],
+      "technical_stack": []
+    }
+  },
+  {
+    "name": "Klajdi Tolis",
+    "email": "k.tolis@teamsystem.com",
+    "summary": "Frontend developer specializing in React-based calendar and agenda systems with strong focus on UI state management and component refactoring.",
+    "skills": {
+      "specific_integrations": [
+        "moment.js",
+        "fullCalendar",
+        "CustomAutocomplete component"
+      ],
+      "domain_concepts": [
+        "Atto di Precetto creation flow",
+        "Agenda filtering logic",
+        "Calendar participant management",
+        "Event deadline handling",
+        "Performance data handling",
+        "Quick commitment modal workflow",
+        "Court date logic",
+        "Event referenti validation"
+      ],
+      "technical_stack": [
+        "React Query",
+        "React hooks",
+        "DialogActions",
+        "Autocomplete components",
+        "Modal state management",
+        "localStorage integration",
+        "CSS timegrid styling",
+        "Conditional rendering patterns"
+      ]
+    }
+  },
+  {
+    "name": "Damian Krzysztyniak",
+    "email": "krdamian227@gmail.com",
+    "summary": "Frontend developer specializing in React component migration, form handling, and UI optimization within enterprise applications.",
+    "skills": {
+      "specific_integrations": [
+        "@vapor/v3-components",
+        "@mui/x-data-grid-pro",
+        "@vapor/react-x-data-grid",
+        "react-hook-form",
+        "moment.js"
+      ],
+      "domain_concepts": [
+        "Legacy URL transformation",
+        "Dynamic field validation",
+        "Address form automation",
+        "Cascading menu navigation",
+        "Date picker state management",
+        "Checkbox value interpretation",
+        "Province-city dependency logic"
+      ],
+      "technical_stack": [
+        "React Query",
+        "Material-UI (MUI)",
+        "Vite configuration",
+        "Babel transpilation",
+        "TypeScript error resolution",
+        "Component migration patterns",
+        "UI kit standardization"
+      ]
+    }
+  },
+  {
+    "name": "marco cucchiarelli",
+    "email": "m.cucchiarelli@teamsystem.com",
+    "summary": "Frontend developer specializing in React-based legal tech applications with strong focus on UI components, data grids, and workflow management.",
+    "skills": {
+      "specific_integrations": [
+        "CKEditor API",
+        "date-fns library",
+        "DatePickerUi component",
+        "ToastNotification system"
+      ],
+      "domain_concepts": [
+        "Legal Practice Management",
+        "Document Preview Logic",
+        "Workflow State Management",
+        "Court Date Handling",
+        "Client Anagrafiche Management",
+        "Archive Export Logic",
+        "Invoice Permission System",
+        "Contact Duplication Validation",
+        "Customs Chamber Integration",
+        "Risk Management Permissions",
+        "CSV Download Logic",
+        "Real Estate Anagrafica",
+        "Label Management System"
+      ],
+      "technical_stack": [
+        "React QueryBuilder",
+        "CustomDataGrid Component",
+        "React Hooks (useDeadlineSelection, useGetCustom)",
+        "React Context API",
+        "TypeScript Typing",
+        "React DatePicker",
+        "React Modal Components",
+        "React Sidebar Components",
+        "React Form Components",
+        "React Navigation Patterns",
+        "CI/CD Pipeline Configuration",
+        "Git Branch Management",
+        "Package.json Dependency Management",
+        "React Component Refactoring",
+        "React Styling with CSS",
+        "React State Management",
+        "React Event Handling",
+        "React Conditional Rendering"
+      ]
+    }
+  },
+  {
+    "name": "Mario Margjini",
+    "email": "m.margjini@teamsystem.com",
+    "summary": "Frontend developer specializing in calendar and engagement management systems with React and Vapor 3.",
+    "skills": {
+      "specific_integrations": [
+        "NETLEX_PDL API",
+        "NetlexSubscriptionType enum",
+        "FullCalendar library",
+        "AdapterDateFns (Vapor 3)",
+        "@1f/react-sdk"
+      ],
+      "domain_concepts": [
+        "Court Date Logic (Udienza)",
+        "Appointment Scheduling (Impegno)",
+        "Legal Agenda Management",
+        "Reminder System for Engagements",
+        "Event Recurrence Logic",
+        "Time Slot Calculation",
+        "User Permission Distribution",
+        "Legal Case Tracking (Pratiche)",
+        "Client Data Management (Anagrafiche)"
+      ],
+      "technical_stack": [
+        "React Query",
+        "TypeScript",
+        "Vapor 3",
+        "FontAwesome icons",
+        "React Context API",
+        "CustomEventUI component",
+        "DatePicker component",
+        "Autocomplete components",
+        "Modal state management",
+        "Calendar event rendering",
+        "UI tooltip system",
+        "Component refactoring patterns"
+      ]
+    }
+  },
+  {
+    "name": "kukka88",
+    "email": "marco.cucchiarelli88@gmail.com",
+    "summary": "Frontend developer specializing in React hooks and state management with experience in URL configuration and authentication systems.",
+    "skills": {
+      "specific_integrations": [
+        "HTTP API endpoints",
+        "URN management system"
+      ],
+      "domain_concepts": [
+        "Authentication Logic",
+        "Login Functionality",
+        "Archive List Management",
+        "Loading State Handling",
+        "User Configuration Management",
+        "Side Navigation Control",
+        "IPv4 Address Handling"
+      ],
+      "technical_stack": [
+        "React Hooks (useUser, useConfig)",
+        "Custom Hooks (useHideSideNav, useGetCustom, usePostCustom)",
+        "AuthRootLogic.js",
+        "package.json dependency management",
+        "checkTsIdRequest.doFetch"
+      ]
+    }
+  },
+  {
+    "name": "Nikita Vagadiya",
+    "email": "n.vagadiya.ext@teamsystem.com",
+    "summary": "Frontend developer specializing in UI fixes, permission systems, and data grid implementations for enterprise legal software.",
+    "skills": {
+      "specific_integrations": [],
+      "domain_concepts": [
+        "Anagrafica Type Management",
+        "Permission-Based Visibility",
+        "Agenda Scheduling Logic",
+        "Court Date Export",
+        "Subscription Type Control",
+        "Data Grid Filtering",
+        "Archive Listing Logic",
+        "Profit Distribution Validation",
+        "Email Model Management",
+        "Listini CRUD Operations"
+      ],
+      "technical_stack": [
+        "React Query",
+        "TypeScript Compilation (TSC)",
+        "DataGrid Components",
+        "Multi-Select Conditions",
+        "Autocomplete Integration",
+        "Query Builder Refactoring",
+        "Modal Priority Management",
+        "Spinner Button Implementation",
+        "UI Bug Fixes",
+        "Component Reusability"
+      ]
+    }
+  },
+  {
+    "name": "nikitav",
+    "email": "nikita.vagadiya@dexma.it",
+    "summary": "Frontend developer specializing in bug fixing and feature development for data-heavy applications with focus on query builders and data grids.",
+    "skills": {
+      "specific_integrations": [
+        "Vapor DataGrid",
+        "Material-UI (MUI)",
+        "PostgreSQL",
+        "JSON data handling"
+      ],
+      "domain_concepts": [
+        "Query Builder Logic",
+        "Data Grid Management",
+        "Utility Query Processing",
+        "Certificate Data Handling",
+        "Performance List Filtering",
+        "Anagrafica Data Management",
+        "Calendar Date Formatting",
+        "Dropdown State Management",
+        "Hide/Show Field Logic",
+        "Status Category Filtering"
+      ],
+      "technical_stack": [
+        "TypeScript Error Handling",
+        "React Query Components",
+        "DataGridPro Library",
+        "JSON Schema Integration",
+        "Query Execution Engine",
+        "React State Management",
+        "Component Rebase Workflow",
+        "Form Dropdown Controls",
+        "Data Table Rendering",
+        "Field Visibility Control"
+      ]
+    }
+  },
+  {
+    "name": "Valerio Pitorri",
+    "email": "v.pitorri.ext@teamsystem.com",
+    "summary": "Frontend developer working on enterprise legal and invoicing platform with focus on UI components and business workflow implementation.",
+    "skills": {
+      "specific_integrations": [],
+      "domain_concepts": [
+        "Document Management Workflow",
+        "Calendar Scheduling System",
+        "Legal Case Management",
+        "Time Tracking Timesheet",
+        "Invoice Billing System",
+        "User Delegation Logic",
+        "Remote Signature Workflow",
+        "Custom Rate Configuration",
+        "Document Exit Tracking",
+        "Court Date Management",
+        "Legal Practice Sections",
+        "Print Template Customization",
+        "External User Management",
+        "Notification Modal System",
+        "Agenda Commitment Editing",
+        "General Settings Configuration"
+      ],
+      "technical_stack": [
+        "React Components",
+        "CRUD Operations",
+        "Form Component Library",
+        "UI State Management",
+        "Calendar UI Implementation",
+        "Merge Request Workflow",
+        "Branch Management",
+        "Frontend Module Architecture"
+      ]
+    }
+  },
+  {
+    "name": "Emine Isufi",
+    "email": "e.isufi@teamsystem.com",
+    "summary": "Frontend developer specializing in agenda management, calendar systems, and anagrafica modules within a legal tech platform.",
+    "skills": {
+      "specific_integrations": [
+        "Calendar Sync API",
+        "3Dots Calendar Integration",
+        "Print Events Weekend Module",
+        "Backend Filters API"
+      ],
+      "domain_concepts": [
+        "Agenda Udienza Management",
+        "Court Date Logic",
+        "Impegno Preview System",
+        "Anagrafica Fatturazione",
+        "Pratica Collegate Logic",
+        "Udienza Status Tracking",
+        "Engagement Conflict Detection",
+        "Calendar Printing Logic",
+        "Dynamic Fields Validation",
+        "Mandatory Fields Check",
+        "Role-Based Access Control",
+        "Date Range Filtering",
+        "Archive Modelli System",
+        "Hearing Issue Resolution"
+      ],
+      "technical_stack": [
+        "React Query",
+        "DataGrid Component",
+        "Loading Button Implementation",
+        "Modal Toggle Logic",
+        "Scrollbar Issue Fixes",
+        "Pipeline Integration",
+        "Merge Request Workflow",
+        "Frontend Filtering System",
+        "Calendar UI Components",
+        "Preview Redirection Logic"
+      ]
+    }
+  },
+  {
+    "name": "Albin Mema",
+    "email": "a.mema.ext@teamsystem.com",
+    "summary": "Frontend developer specializing in React-based enterprise applications with expertise in calendar systems, data grids, and workflow management.",
+    "skills": {
+      "specific_integrations": [
+        "FontAwesome icons",
+        "Material UI (Mui)",
+        "CSV upload API",
+        "Remote signature API",
+        "Permission management API",
+        "Workflow editor API",
+        "Custom rate API",
+        "Document management API",
+        "Notification API",
+        "Embed links API"
+      ],
+      "domain_concepts": [
+        "Calendar event management",
+        "Court date logic",
+        "Deadline tracking",
+        "Task assignment (Impegni)",
+        "Document workflow",
+        "Custom rate configuration",
+        "Remote signature process",
+        "Permission groups",
+        "Template printing",
+        "Archive filtering",
+        "Event delegation",
+        "Invoice permissions",
+        "Full-day event handling",
+        "Overlapping event resolution",
+        "Quick calendar access",
+        "Deadline calendar integration"
+      ],
+      "technical_stack": [
+        "React components",
+        "TypeScript",
+        "Biome formatter",
+        "React Query",
+        "Custom hooks",
+        "Modal components",
+        "Toast notifications",
+        "Autocomplete wrapper",
+        "Data grid",
+        "Select components",
+        "Datepicker integration",
+        "PDF rendering",
+        "Package management",
+        "API error handling",
+        "Component refactoring",
+        "State management",
+        "Form validation",
+        "UI styling updates"
+      ]
+    }
+  }
+]

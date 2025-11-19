@@ -115,12 +115,7 @@ export default defineSchema({
     teamMembers: v.optional(v.array(v.string())),
     
     // Required skills for the project
-    requiredSkills: v.optional(v.array(v.object({
-      name: v.string(),
-      category: v.string(),
-      minimumProficiency: v.string(),
-      isMandatory: v.boolean(),
-    }))),
+    requiredSkills: v.optional(v.array(v.string())),
     
     technologies: v.optional(v.array(v.string())),
     domain: v.optional(v.string()),

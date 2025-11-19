@@ -20,6 +20,34 @@ export default defineSchema({
     technologies: v.array(v.string()),
     domain: v.string(),
     projectType: v.string(),
+    location: v.string(),
+    repositoryUrl: v.optional(v.string()),
+    jiraProjectKey: v.optional(v.string()),
+    totalCommits: v.number(),
+    totalJiraTickets: v.number(),
+    totalJiraTicketsClosed: v.number(),
+    recentCommits: v.optional(
+      v.array(
+        v.object({
+          commitHash: v.string(),
+          message: v.string(),
+          author: v.string(),
+          timestamp: v.number(),
+        })
+      )
+    ),
+    recentJiraTickets: v.optional(
+      v.array(
+        v.object({
+          ticketId: v.string(),
+          title: v.string(),
+          status: v.string(),
+          assignee: v.optional(v.string()),
+          updatedAt: v.number(),
+        })
+      )
+    ),
+
     createdAt: v.number(),
     updatedAt: v.number(),
     isActive: v.boolean(),

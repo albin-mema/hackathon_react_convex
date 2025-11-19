@@ -9,6 +9,8 @@ export default defineSchema({
     lastName: v.string(),
     email: v.string(),
     avatar: v.optional(v.string()),
+    location: v.string(),
+    languages: v.array(v.string()),
     businessUnitId: v.string(),
     businessUnitName: v.string(),
     department: v.string(),
@@ -36,6 +38,29 @@ export default defineSchema({
     yearsInTeamSystem: v.number(),
     currentProjects: v.array(v.string()),
     pastProjects: v.array(v.string()),
+    totalCommits: v.number(),
+    totalJiraTasksClosed: v.number(),
+    recentCommits: v.optional(
+      v.array(
+        v.object({
+          commitHash: v.string(),
+          message: v.string(),
+          repository: v.string(),
+          timestamp: v.number(),
+        })
+      )
+    ),
+    recentJiraTasks: v.optional(
+      v.array(
+        v.object({
+          taskId: v.string(),
+          title: v.string(),
+          status: v.string(),
+          closedAt: v.number(),
+        })
+      )
+    ),
+    
     createdAt: v.number(),
     updatedAt: v.number(),
     isActive: v.boolean(),

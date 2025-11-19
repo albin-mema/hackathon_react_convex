@@ -50,26 +50,28 @@ export default defineSchema({
     recentCommits: v.optional(
       v.array(
         v.object({
-          commitHash: v.string(),
-          message: v.string(),
-          repository: v.string(),
-          timestamp: v.number(),
+          commitHash: v.optional(v.string()),
+          message: v.optional(v.string()),
+          repository: v.optional(v.string()),
+          timestamp: v.optional(v.number()),
         })
       )
     ),
     recentJiraTasks: v.optional(
       v.array(
         v.object({
-          taskId: v.string(),
-          title: v.string(),
-          status: v.string(),
-          closedAt: v.number(),
+          taskId: v.optional(v.string()),
+          title: v.optional(v.string()),
+          status: v.optional(v.string()),
+          closedAt: v.optional(v.number()),
+          task: v.optional(v.string()),
+          timestamp: v.optional(v.number()),
         })
       )
     ),
-    createdAt: v.number(),
-    updatedAt: v.number(),
-    isActive: v.boolean(),
+    createdAt: v.optional(v.number()),
+    updatedAt: v.optional(v.number()),
+    isActive: v.optional(v.boolean()),
   })
     .index("by_email", ["email"])
     .index("by_businessUnit", ["businessUnitId"])
@@ -77,16 +79,16 @@ export default defineSchema({
     .index("by_role", ["role"]),
 
   projects: defineTable({
-    projectCode: v.string(),
-    name: v.string(),
-    description: v.string(),
-    businessUnitId: v.string(),
-    businessUnitName: v.string(),
-    status: v.string(), // "planning", "active", "on_hold", "completed", "cancelled"
-    priority: v.string(), // "low", "medium", "high", "critical"
-    startDate: v.string(),
+    projectCode: v.optional(v.string()),
+    name: v.optional(v.string()),
+    description: v.optional(v.string()),
+    businessUnitId: v.optional(v.string()),
+    businessUnitName: v.optional(v.string()),
+    status: v.optional(v.string()), // "planning", "active", "on_hold", "completed", "cancelled"
+    priority: v.optional(v.string()), // "low", "medium", "high", "critical"
+    startDate: v.optional(v.string()),
     endDate: v.optional(v.string()),
-    estimatedDuration: v.number(),
+    estimatedDuration: v.optional(v.number()),
     
     // Budget tracking
     budget: v.optional(v.object({
@@ -97,7 +99,7 @@ export default defineSchema({
     })),
     
     // Team capacity tracking
-    teamCapacity: v.object({
+    teamCapacity: v.optional(v.object({
       requiredSize: v.number(),
       currentSize: v.number(),
       missingRoles: v.array(v.object({
@@ -106,24 +108,24 @@ export default defineSchema({
         skills: v.array(v.string()),
         priority: v.string(),
       })),
-    }),
+    })),
     
-    teamSize: v.number(),
+    teamSize: v.optional(v.number()),
     teamLead: v.optional(v.string()),
-    teamMembers: v.array(v.string()),
+    teamMembers: v.optional(v.array(v.string())),
     
     // Required skills for the project
-    requiredSkills: v.array(v.object({
+    requiredSkills: v.optional(v.array(v.object({
       name: v.string(),
       category: v.string(),
       minimumProficiency: v.string(),
       isMandatory: v.boolean(),
-    })),
+    }))),
     
-    technologies: v.array(v.string()),
-    domain: v.string(),
-    projectType: v.string(),
-    location: v.string(),
+    technologies: v.optional(v.array(v.string())),
+    domain: v.optional(v.string()),
+    projectType: v.optional(v.string()),
+    location: v.optional(v.string()),
     
     // Health indicators
     health: v.optional(v.object({
@@ -144,16 +146,16 @@ export default defineSchema({
     
     repositoryUrl: v.optional(v.string()),
     jiraProjectKey: v.optional(v.string()),
-    totalCommits: v.number(),
-    totalJiraTickets: v.number(),
-    totalJiraTicketsClosed: v.number(),
+    totalCommits: v.optional(v.number()),
+    totalJiraTickets: v.optional(v.number()),
+    totalJiraTicketsClosed: v.optional(v.number()),
     recentCommits: v.optional(
       v.array(
         v.object({
-          commitHash: v.string(),
-          message: v.string(),
-          author: v.string(),
-          timestamp: v.number(),
+          commitHash: v.optional(v.string()),
+          message: v.optional(v.string()),
+          author: v.optional(v.string()),
+          timestamp: v.optional(v.number()),
         })
       )
     ),

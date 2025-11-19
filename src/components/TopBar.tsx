@@ -1,7 +1,7 @@
 // src/components/TopBar.tsx
 import { Briefcase, Users } from 'lucide-react';
 
-type View = 'projects' | 'employees' | 'project-detail' | 'matching';
+type View = 'projects' | 'employees' | 'project-detail' | 'matching' | 'employee-detail';
 
 interface TopBarProps {
   currentView: View;
@@ -10,7 +10,7 @@ interface TopBarProps {
 
 export default function TopBar({ currentView, onNavigate }: TopBarProps) {
   const isProjectsActive = currentView === 'projects' || currentView === 'project-detail' || currentView === 'matching';
-  const isEmployeesActive = currentView === 'employees';
+  const isEmployeesActive = currentView === 'employees' || currentView === 'employee-detail';
 
   return (
     <div className="bg-[#0066CC] shadow-md">

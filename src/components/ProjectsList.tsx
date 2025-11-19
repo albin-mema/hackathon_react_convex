@@ -1,5 +1,5 @@
 // src/components/ProjectsList.tsx
-import { Search, AlertCircle } from 'lucide-react';
+import { Search, Calendar, MapPin, Users } from 'lucide-react';
 
 interface ProjectsListProps {
   onViewProject: (projectId: string) => void;
@@ -11,83 +11,131 @@ export default function ProjectsList({ onViewProject }: ProjectsListProps) {
       id: '1',
       name: 'AI Analytics Platform',
       code: 'TS-AI-2024',
+      description: 'Building next-gen analytics with machine learning capabilities',
       location: 'Milan',
-      teamSize: '6/8',
-      missing: 2,
+      status: 'active',
+      teamCapacity: {
+        requiredSize: 8,
+        currentSize: 6,
+      },
       deadline: '2024-12-15',
-      status: 'at_risk'
+      technologies: ['Python', 'TensorFlow', 'React', 'AWS'],
     },
     {
       id: '2',
       name: 'Cloud Migration',
       code: 'TS-CLOUD-2024',
+      description: 'Migrating legacy systems to cloud infrastructure',
       location: 'Tirana',
-      teamSize: '5/5',
-      missing: 0,
+      status: 'active',
+      teamCapacity: {
+        requiredSize: 5,
+        currentSize: 5,
+      },
       deadline: '2024-12-01',
-      status: 'on_track'
+      technologies: ['Azure', 'Docker', 'Kubernetes', 'Terraform'],
     },
     {
       id: '3',
       name: 'Mobile Banking App',
       code: 'TS-MOBILE-2025',
+      description: 'Developing modern mobile banking solution with advanced security',
       location: 'Rome',
-      teamSize: '4/10',
-      missing: 6,
+      status: 'planning',
+      teamCapacity: {
+        requiredSize: 10,
+        currentSize: 4,
+      },
       deadline: '2025-08-30',
-      status: 'needs_team'
+      technologies: ['React Native', 'Swift', 'Kotlin', 'Node.js'],
     },
   ];
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
-        <div className="relative">
+    <div className="space-y-6">
+      {/* Header Section */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Projects</h1>
+          <p className="text-gray-500 mt-1">{projects.length} active projects</p>
+        </div>
+        <div className="relative w-96">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
             placeholder="Search projects..."
-            className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0066CC] focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:border-transparent"
           />
         </div>
       </div>
 
-      <div className="space-y-3">
-        {projects.map((project) => (
-          <div 
-            key={project.id}
-            className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <div className="flex items-center space-x-3 mb-2">
-                  <h3 className="text-lg font-bold text-gray-900">{project.name}</h3>
-                  <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-mono">
-                    {project.code}
-                  </span>
-                  {project.missing > 0 && (
-                    <span className="flex items-center space-x-1 px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs font-semibold">
-                      <AlertCircle className="w-3 h-3" />
-                      <span>{project.missing} missing</span>
+      {/* Projects List */}
+      <div className="space-y-4">
+        {projects.map((project) => {
+          const missingTeamMembers = project.teamCapacity.requiredSize - project.teamCapacity.currentSize;
+          
+          return (
+            <div 
+              key={project.id}
+              className="bg-white border border-gray-200 rounded-lg p-6 hover:border-[#0066CC] transition-all duration-200"
+            >
+              {/* Header */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h2 className="text-xl font-semibold text-gray-900">
+                      {project.name}
+                    </h2>
+                    <span className="px-2.5 py-0.5 bg-gray-100 text-gray-600 rounded text-sm font-mono">
+                      {project.code}
                     </span>
-                  )}
+                  </div>
+                  <p className="text-gray-600 text-sm mb-4">{project.description}</p>
+                  
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, idx) => (
+                      <span 
+                        key={idx}
+                        className="px-2.5 py-1 bg-gray-50 text-gray-700 text-xs rounded border border-gray-200"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex items-center space-x-6 text-sm text-gray-600">
-                  <span>📍 {project.location}</span>
-                  <span>👥 Team: {project.teamSize}</span>
-                  <span>📅 {project.deadline}</span>
+                
+                <button 
+                  onClick={() => onViewProject(project.id)}
+                  className="px-5 py-2 bg-[#0066CC] text-white rounded-lg font-medium hover:bg-[#0052A3] transition-colors"
+                >
+                  View Details
+                </button>
+              </div>
+
+              {/* Info Grid */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="flex items-center gap-2 text-sm">
+                  <MapPin className="w-4 h-4 text-gray-400" />
+                  <span className="text-gray-600">{project.location}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Calendar className="w-4 h-4 text-gray-400" />
+                  <span className="text-gray-600">{project.deadline}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Users className="w-4 h-4 text-gray-400" />
+                  <span className="text-gray-600">
+                    {project.teamCapacity.currentSize} / {project.teamCapacity.requiredSize} members
+                    {missingTeamMembers > 0 && (
+                      <span className="text-gray-400 ml-1">({missingTeamMembers} needed)</span>
+                    )}
+                  </span>
                 </div>
               </div>
-              <button 
-                onClick={() => onViewProject(project.id)}
-                className="px-6 py-2 bg-[#0066CC] text-white rounded-lg font-medium hover:bg-[#0052A3] transition-colors"
-              >
-                View Details
-              </button>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

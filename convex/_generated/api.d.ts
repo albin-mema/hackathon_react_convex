@@ -8,9 +8,9 @@
  * @module
  */
 
-import type * as counter from "../counter.js";
-import type * as schema_employer from "../schema/employer.js";
-import type * as schema_projects from "../schema/projects.js";
+import type * as employees from "../employees.js";
+import type * as projects from "../projects.js";
+import type * as seedData from "../seedData.js";
 
 import type {
   ApiFromModules,
@@ -19,9 +19,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  counter: typeof counter;
-  "schema/employer": typeof schema_employer;
-  "schema/projects": typeof schema_projects;
+  employees: typeof employees;
+  projects: typeof projects;
+  seedData: typeof seedData;
 }>;
 
 /**

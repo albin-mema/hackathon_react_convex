@@ -1,32 +1,32 @@
 // src/components/Navigation.tsx
-import { Compass, Users, Briefcase, Package } from 'lucide-react';
+import { LayoutDashboard, Briefcase, Users, GitBranch } from 'lucide-react';
 
-type ViewType = 'dashboard' | 'project-matching' | 'employee-matching' | 'features-repo';
+type ViewType = 'dashboard' | 'projects' | 'employees' | 'matching';
 
 interface NavigationProps {
   currentView: ViewType;
-  onNavigate: (item: string) => void;
+  onNavigate: (view: ViewType) => void;
 }
 
 export default function Navigation({ currentView, onNavigate }: NavigationProps) {
   const navItems = [
-    { id: 'project-matching', label: 'Project Matching', icon: Briefcase },
-    { id: 'employee-matching', label: 'Connect People', icon: Users },
-    { id: 'features-repo', label: 'Features Library', icon: Package },
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'projects', label: 'Projects', icon: Briefcase },
+    { id: 'employees', label: 'Team', icon: Users },
   ];
 
   return (
-    <nav className="bg-white shadow-md border-b border-gray-200">
+    <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-pink-600 rounded-lg flex items-center justify-center">
-              <Compass className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <GitBranch className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">ConnectHub</h1>
-              <p className="text-xs text-gray-500">Compass Tirana 2025</p>
+              <h1 className="text-lg font-bold text-gray-900">ConnectHub Manager</h1>
+              <p className="text-xs text-gray-500">Project Allocation System</p>
             </div>
           </div>
 
@@ -39,17 +39,17 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
               return (
                 <button
                   key={item.id}
-                  onClick={() => onNavigate(item.id as string)}
+                  onClick={() => onNavigate(item.id as ViewType)}
                   className={`
-                    flex items-center space-x-2 px-4 py-2 rounded-lg transition-all
+                    flex items-center space-x-2 px-4 py-2 rounded-lg transition-all font-medium
                     ${isActive 
-                      ? 'bg-gradient-to-r from-blue-600 to-pink-600 text-white shadow-lg' 
+                      ? 'bg-blue-600 text-white shadow-md' 
                       : 'text-gray-600 hover:bg-gray-100'
                     }
                   `}
                 >
                   <Icon className="w-4 h-4" />
-                  <span className="font-medium">{item.label}</span>
+                  <span>{item.label}</span>
                 </button>
               );
             })}
@@ -57,8 +57,12 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
 
           {/* User Profile */}
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-bold">MR</span>
+            <div className="text-right">
+              <p className="text-sm font-medium text-gray-900">Manager Name</p>
+              <p className="text-xs text-gray-500">Team Lead</p>
+            </div>
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-bold">MN</span>
             </div>
           </div>
         </div>

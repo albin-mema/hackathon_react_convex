@@ -17,7 +17,7 @@ export default function TopBar({ currentView, onNavigate }: TopBarProps) {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-3">
-            <div className="text-2xl font-bold text-white">ConnectHub</div>
+            <div className="text-2xl font-bold text-white">Teamsystem Radar</div>
           </div>
 
           <div className="flex space-x-2">

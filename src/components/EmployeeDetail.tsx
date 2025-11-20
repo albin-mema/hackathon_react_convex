@@ -2,7 +2,7 @@
 import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import { ArrowLeft, MapPin, GitCommit, CheckSquare, Mail, Briefcase, Sparkles, MessageCircle } from 'lucide-react';
+import { ArrowLeft, MapPin, GitCommit, CheckSquare, Mail, Briefcase, Sparkles } from 'lucide-react';
 
 interface EmployeeDetailProps {
   employeeId: Id<'employees'> | null;
@@ -87,18 +87,29 @@ export default function EmployeeDetail({ employeeId, onBack }: EmployeeDetailPro
               href={employee?.email ? `https://teams.microsoft.com/l/chat/0/0?users=${encodeURIComponent(employee.email)}` : '#'}
               target="_blank"
               rel="noreferrer"
-              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border ${employee?.email ? 'text-[#0066CC] border-blue-200 hover:bg-blue-50' : 'text-gray-400 border-gray-200 cursor-not-allowed'}`}
+              className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${employee?.email ? 'text-purple-700 border-purple-200 hover:bg-purple-50' : 'text-gray-400 border-gray-200 cursor-not-allowed'}`}
               aria-disabled={!employee?.email}
             >
-              <MessageCircle className="w-4 h-4" />
-              Chat in Teams
+              {/* Microsoft Teams Icon (SVG) */}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-4 h-4" aria-hidden>
+                <path fill="#6264A7" d="M23 12h11a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H23a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z"/>
+                <path fill="#464EB8" d="M28 10a4 4 0 0 1 4-4h2a4 4 0 0 1 0 8h-2a4 4 0 0 1-4-4z"/>
+                <path fill="#7B83EB" d="M12 18a3 3 0 0 1 3-3h10v18H15a3 3 0 0 1-3-3V18z"/>
+                <path fill="#fff" d="M17 20h8v2h-3v8h-2v-8h-3v-2z"/>
+              </svg>
+              Teams
             </a>
             <a
               href={employee?.email ? `mailto:${employee.email}` : '#'}
-              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border ${employee?.email ? 'text-[#0066CC] border-blue-200 hover:bg-blue-50' : 'text-gray-400 border-gray-200 cursor-not-allowed'}`}
+              className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${employee?.email ? 'text-[#0A66C2] border-[#B3D7F2] hover:bg-[#E6F2FB]' : 'text-gray-400 border-gray-200 cursor-not-allowed'}`}
               aria-disabled={!employee?.email}
             >
-              <Mail className="w-4 h-4" />
+              {/* Microsoft Outlook Icon (SVG) */}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-4 h-4" aria-hidden>
+                <path fill="#0A66C2" d="M28 8h10a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H28V8z"/>
+                <path fill="#0078D4" d="M6 14h22v20H6a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z"/>
+                <path fill="#fff" d="M10 20h10a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1zm0 0 6 4 6-4"/>
+              </svg>
               Outlook
             </a>
           </div>
@@ -243,7 +254,7 @@ export default function EmployeeDetail({ employeeId, onBack }: EmployeeDetailPro
                 <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
                   <div className="flex items-start justify-between gap-2 mb-1.5">
                     <span className="font-mono text-xs text-[#0066CC]">{c.commitHash}</span>
-                    <span className="text-xs text-gray-500 whitespace-nowrap">{formatTimeAgo(c.timestamp)}</span>
+                    <span className="text-xs text-gray-500 whitespace-nowrap">{typeof c.timestamp === 'number' ? formatTimeAgo(c.timestamp) : '-'}</span>
                   </div>
                   <p className="text-sm text-gray-900 mb-1">{c.message}</p>
                   <p className="text-xs text-gray-600">Repo: {c.repository}</p>
@@ -259,22 +270,28 @@ export default function EmployeeDetail({ employeeId, onBack }: EmployeeDetailPro
               Recent Jira Tasks
             </h3>
             <div className="space-y-2">
-              {(employee?.recentJiraTasks ?? []).map((t, idx) => (
-                <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
-                  <div className="flex items-start justify-between gap-2 mb-1.5">
-                    <span className="font-mono text-xs text-[#0066CC]">{t.taskId}</span>
-                    <span className="text-xs text-gray-500 whitespace-nowrap">{formatTimeAgo(t.closedAt)}</span>
+              {((employee?.recentJiraTasks ?? []).length === 0) && (
+                <div className="text-sm text-gray-500">No recent Jira tasks.</div>
+              )}
+              {(employee?.recentJiraTasks ?? []).map((t: any, idx: number) => {
+                const ts = typeof t.closedAt === 'number' ? t.closedAt : (typeof t.timestamp === 'number' ? t.timestamp : undefined);
+                return (
+                  <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                    <div className="flex items-start justify-between gap-2 mb-1.5">
+                      <span className="font-mono text-xs text-[#0066CC]">{t.taskId}</span>
+                      <span className="text-xs text-gray-500 whitespace-nowrap">{typeof ts === 'number' ? formatTimeAgo(ts) : '-'}</span>
+                    </div>
+                    <p className="text-sm text-gray-900 mb-1">{t.title}</p>
+                    <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                      t.status === 'Closed' ? 'bg-white text-gray-700 border border-gray-200' :
+                      t.status === 'In Progress' ? 'bg-blue-50 text-blue-700 border border-blue-100' :
+                      'bg-white text-gray-600 border border-gray-200'
+                    }`}>
+                      {t.status}
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-900 mb-1">{t.title}</p>
-                  <span className={`px-2 py-0.5 rounded text-xs font-medium ${
-                    t.status === 'Closed' ? 'bg-white text-gray-700 border border-gray-200' :
-                    t.status === 'In Progress' ? 'bg-blue-50 text-blue-700 border border-blue-100' :
-                    'bg-white text-gray-600 border border-gray-200'
-                  }`}>
-                    {t.status}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

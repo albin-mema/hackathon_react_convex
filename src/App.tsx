@@ -17,6 +17,7 @@ function AppContent() {
   const [currentView, setCurrentView] = useState<View>('projects');
   const [selectedProjectId, setSelectedProjectId] = useState<Id<'projects'> | null>(null);
   const [missingRole, setMissingRole] = useState<string | null>(null);
+  const [searchKeywords, setSearchKeywords] = useState<string | null>(null);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<Id<'employees'> | null>(null);
 
   const handleViewProject = (projectId: Id<'projects'>) => {
@@ -24,9 +25,10 @@ function AppContent() {
     setCurrentView('project-detail');
   };
 
-  const handleFindMatch = (projectId: Id<'projects'>, role: string) => {
+  const handleFindMatch = (projectId: Id<'projects'>, role: string, keywords: string) => {
     setSelectedProjectId(projectId);
     setMissingRole(role);
+    setSearchKeywords(keywords || null);
     setCurrentView('matching');
   };
 
@@ -62,7 +64,9 @@ function AppContent() {
           <MatchingResults 
             projectId={selectedProjectId}
             missingRole={missingRole}
+            keywords={searchKeywords}
             onBack={handleBack}
+            onViewEmployee={handleViewEmployee}
           />
         )}
         {currentView === 'employee-detail' && (
